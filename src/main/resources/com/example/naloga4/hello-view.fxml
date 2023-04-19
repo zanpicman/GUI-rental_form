@@ -128,7 +128,7 @@
                               <Insets left="30.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="cena" style="-fx-font-size: 15;" text="Cena:" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                        <Label fx:id="cena" style="-fx-font-size: 20; -fx-text-fill: blue;" text="Cena:" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="4" />
                         <DatePicker fx:id="datumOd" maxWidth="95.0" promptText="Datum" GridPane.columnIndex="1" />
                         <DatePicker fx:id="datumDo" maxWidth="95.0" promptText="Datum" GridPane.columnIndex="5" />
                         <Spinner fx:id="izposojaOd" maxWidth="55.0" prefWidth="52.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
@@ -172,6 +172,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
@@ -251,6 +252,7 @@
                                     </Spinner>
                                     <Spinner fx:id="leta" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button mnemonicParsing="false" onAction="#izracunCB" prefHeight="39.0" prefWidth="109.0" style="-fx-font-size: 15;" text="Izračun cene" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                                     <ComboBox fx:id="placilo" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
@@ -262,11 +264,8 @@
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <Label style="-fx-font-size: 18;" text="Skupna cena:" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
-                                       <GridPane.margin>
-                                          <Insets left="30.0" />
-                                       </GridPane.margin>
-                                    </Label>
+                                    <Label fx:id="skupnaCena" style="-fx-font-size: 20; -fx-background-color: yellow; -fx-text-fill: red;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="99.0" style="-fx-font-size: 20;" text="Shrani" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                            </center>

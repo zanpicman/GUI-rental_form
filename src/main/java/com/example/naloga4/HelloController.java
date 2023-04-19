@@ -1,5 +1,6 @@
 package com.example.naloga4;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -25,7 +26,10 @@ public class HelloController implements Initializable {
     public DatePicker datumOd;
     public DatePicker datumDo;
     public Label status;
+    public Label skupnaCena;
     private long dni;
+
+    private int cena1;
 
     @FXML
 
@@ -47,23 +51,27 @@ public class HelloController implements Initializable {
         avtomobil.getItems().addAll("MB C180", "Audi A5", "Toyota Avensis", "Honda Accord", "Škoda Octavia");
         avtomobil.setValue("Audi A5");
         cena.setText("Cena: 100€/dan");
+        cena1 = 100;
         velikost.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals("Srednji")) {
                 avtomobil.getItems().clear();
                 avtomobil.getItems().addAll("MB C180", "Audi A5", "Toyota Avensis", "Honda Accord", "Škoda Octavia");
                 avtomobil.setValue("Audi A5");
                 cena.setText("Cena: 100€/dan");
+                cena1 = 100;
             } else if (newValue.equals("Velik")) {
                 avtomobil.getItems().clear();
                 avtomobil.getItems().addAll("VW Arteon", "Audi Q8", "Ford Raptor", "Dodge Challenger", "Ford Mustang");
                 avtomobil.setValue("VW Arteon");
                 cena.setText("Cena: 130€/dan");
+                cena1 = 130;
             }
              else if (newValue.equals("Majhen")) {
                 avtomobil.getItems().clear();
                 avtomobil.getItems().addAll("Fiat Panda","Hyundai Getz", "Mini Cooper", "Citroen C3", "Renault Clio");
                 avtomobil.setValue("Fiat Panda");
                 cena.setText("Cena: 80€/dan");
+                cena1 = 80;
 
             }
         });
@@ -91,4 +99,9 @@ public class HelloController implements Initializable {
             long daysBetween = ChronoUnit.DAYS.between(startDate, endDate);
             dni = daysBetween;
     }}
+
+    public void izracunCB(ActionEvent actionEvent) {
+        skupnaCena.setText(String.valueOf(dni*cena1 + dni * 2) + "€");
+
+    }
 }
