@@ -3,7 +3,10 @@ package com.example.naloga4;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,6 +30,19 @@ public class HelloController implements Initializable {
     public DatePicker datumDo;
     public Label status;
     public Label skupnaCena;
+    public Button saveButton;
+    public TextArea povzetek;
+    public TextField ime;
+    public TextField naslov;
+    public TextField mail;
+    public TextField priimek;
+    public TextField telefon;
+    public CheckBox zavarovanje;
+    public TextField kartica;
+    public TextField cvv;
+    public Tab povzetekTab;
+    public TabPane tabPane;
+    public Tab podatki;
     private long dni;
 
     private int cena1;
@@ -36,11 +52,11 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SpinnerValueFactory<Double> valueFactory =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 23.00, 9.00, 1.00);
+        SpinnerValueFactory<Integer> valueFactory =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 9, 1);
         izposojaOd.setValueFactory(valueFactory);
-        SpinnerValueFactory<Double> valueFactory1 =
-                new SpinnerValueFactory.DoubleSpinnerValueFactory(0.00, 23.00, 9.00, 1.00);
+        SpinnerValueFactory<Integer> valueFactory1 =
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, 9, 1);
         izposojaDo.setValueFactory(valueFactory1);
         prevzemno.getItems().addAll("Ljubljana", "Maribor"," Celje", "Kranj", "Velenje", "Koper", "Novo Mesto", "Murska Sobota", "Jesenice", "Portorož", "letališče Brnik", "letališče Maribor");
         prevzemno.setValue("Ljubljana");
@@ -101,7 +117,51 @@ public class HelloController implements Initializable {
     }}
 
     public void izracunCB(ActionEvent actionEvent) {
-        skupnaCena.setText(String.valueOf(dni*cena1 + dni * 2) + "€");
+        if (zavarovanje.isSelected())skupnaCena.setText(String.valueOf(dni*cena1+dni*2) + "€");
+        else skupnaCena.setText(String.valueOf(dni*cena1) + "€");
+
+    }
+
+    public void shraniCB(ActionEvent actionEvent) {
+        if (ime.getText().equals("") || priimek.getText().equals("") ||
+                ime.getText().equals("") || priimek.getText().equals("") || naslov.getText().equals("") ||
+                naslov.getText().equals("") ||  mail.getText().equals("") || telefon.getText().equals("")) {
+            System.out.println(" prazna polja");
+            status.setText("Prazna polja");
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Opozorilo");
+            alert.setHeaderText("Izpolnite vsa polja");
+            alert.setContentText("Nekatera polja so prazna, prosim izpolnite vse!");
+            alert.showAndWait();
+
+        } else {
+        povzetek.setText("Ime: " + ime.getText() + "\nPriimek: " + priimek.getText() +"\nNaslov: "+ naslov.getText()
+                    + "\nTelefon: " + telefon.getText() + "\nE-mail: " + mail.getText() + "\nStarost: "
+        + starost.getValue() + "\nLeta (izpit): " + leta.getValue() + "\nDodatno zavarovanje: "+ zavarovanje.isSelected()
+        + "\nŠtevilka kartice: " + "xxxx-xxxx-xxxx-1111" + "\nIzposoja od: "+ datumOd.getValue() + " "+ izposojaOd.getValue() + ".00"
+        + "\nIzposoja do: "+  datumDo.getValue() + " "+  izposojaDo.getValue()+".00"
+        +"\nAvto: " + avtomobil.getValue() + "\nMenjalnik: Samodejni" + "\nGorivo: Bencin" + "\nPrevzemno mesto: "
+        + prevzemno.getValue() + "\nOddajno mesto: " + oddajno.getValue() + "\nSkupna cena: " + (dni*cena1 + dni * 2) );
+        povzetekTab.setDisable(false);
+        tabPane.getSelectionModel().select(povzetekTab);
+        status.setText("Uspešno shranjeno");
+
+
+    }
+}
+
+    public void ponastaviCB(ActionEvent actionEvent) {
+        ime.setText("");
+        priimek.setText("");
+        naslov.setText("");
+        mail.setText("");
+        kartica.setText("");
+        cvv.setText("");
+        telefon.setText("");
+        status.setText("Ponastavljen obrazec");
+        povzetekTab.setDisable(true);
+        tabPane.getSelectionModel().select(podatki);
 
     }
 }

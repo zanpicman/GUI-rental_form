@@ -13,6 +13,7 @@
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
@@ -27,19 +28,14 @@
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Datoteka">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#shraniCB" text="Shrani" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Uredi">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#ponastaviCB" text="Ponastavi" />
                   </items>
                 </Menu>
               </menus>
@@ -48,7 +44,7 @@
          <center>
             <ToolBar prefHeight="19.0" prefWidth="600.0" BorderPane.alignment="CENTER">
               <items>
-                <Button mnemonicParsing="false" text="Ponastavi obrazec" />
+                <Button mnemonicParsing="false" onAction="#ponastaviCB" text="Ponastavi obrazec" />
               </items>
             </ToolBar>
          </center>
@@ -66,14 +62,14 @@
       </BorderPane>
    </bottom>
    <center>
-      <TabPane prefWidth="700.0" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPane" prefWidth="700.0" BorderPane.alignment="CENTER">
          <tabs>
             <Tab closable="false" text="Izposoja avtomobilov">
                <content>
                   <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="149.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0" minWidth="10.0" prefWidth="90.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="90.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="124.0" />
@@ -137,13 +133,13 @@
                         <ComboBox fx:id="oddajno" prefWidth="155.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                         <ComboBox fx:id="velikost" prefWidth="155.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                         <ComboBox fx:id="avtomobil" prefWidth="155.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                        <RadioButton mnemonicParsing="false" text="Samodejni" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <RadioButton mnemonicParsing="false" selected="true" text="Samodejni" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <toggleGroup>
                               <ToggleGroup fx:id="menjalnik" />
                            </toggleGroup>
                         </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Avtomatski" toggleGroup="$menjalnik" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <RadioButton mnemonicParsing="false" text="Bencin" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <RadioButton mnemonicParsing="false" selected="true" text="Bencin" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <toggleGroup>
                               <ToggleGroup fx:id="gorivo" />
                            </toggleGroup>
@@ -153,7 +149,7 @@
                   </GridPane>
                </content>
             </Tab>
-            <Tab closable="false" text="Podatki stranke">
+            <Tab fx:id="podatki" closable="false" text="Podatki stranke">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -232,44 +228,53 @@
                                           <Insets left="30.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" />
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                    <TextField fx:id="ime" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="naslov" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="mail" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="4">
+                                    <TextField fx:id="priimek" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="4">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </TextField>
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="telefon" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Spinner fx:id="starost" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </Spinner>
                                     <Spinner fx:id="leta" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <CheckBox mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <CheckBox fx:id="zavarovanje" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Button mnemonicParsing="false" onAction="#izracunCB" prefHeight="39.0" prefWidth="109.0" style="-fx-font-size: 15;" text="Izračun cene" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                                     <ComboBox fx:id="placilo" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </ComboBox>
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                    <TextField maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
+                                    <TextField fx:id="kartica" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="cvv" maxWidth="30.0" minWidth="40.0" prefWidth="30.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
                                        <GridPane.margin>
                                           <Insets right="30.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Label fx:id="skupnaCena" style="-fx-font-size: 20; -fx-background-color: yellow; -fx-text-fill: red;" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                                    <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="99.0" style="-fx-font-size: 20;" text="Shrani" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                                    <Button fx:id="saveButton" mnemonicParsing="false" onAction="#shraniCB" prefHeight="45.0" prefWidth="99.0" style="-fx-font-size: 20;" text="Shrani" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                                  </children>
                               </GridPane>
                            </center>
                         </BorderPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="povzetekTab" closable="false" disable="true" text="Povzetek">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TextArea fx:id="povzetek" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-font-size: 14;" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </content>
