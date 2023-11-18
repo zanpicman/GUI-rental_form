@@ -1,4 +1,5 @@
-Basically, my job was to create a simple but effective GUI in JavaFX for a company that rents cars. First task was to analyze the dialogue below and  then create the said GUI.
+# GUI-rental_form
+My job was to create a simple but effective GUI in JavaFX for a company that rents cars. First task was to analyze the dialogue below and  then create the said GUI.
 
 A dialogue between the customer and the person, employed at the car rental service (the application user):  
 
